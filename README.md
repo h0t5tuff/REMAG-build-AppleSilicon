@@ -46,3 +46,27 @@ cd build
 ctest
 ./bxdecay0-test_decay0_generator
 ./bxdecay0-run -s 42 -n 1000 -c dbd -N "Ge76" -m 1 -b "./genGe76"
+
+
+
+
+
+
+
+
+# EXAMPLES
+
+REMAGE bxdecay0 test:
+
+cd ~/REMAGE/tests/bxdecay0
+rm -f *.root
+remage -g gdml/geometry.gdml \
+       -o decay0_0vbb_250k.root \
+       -s MODE="0vbb 0" \
+       -- macros/template.mac
+
+Smoke test with reduced statistics for testing:
+sed 's#/run/beamOn 250000#/run/beamOn 1000#' macros/template.mac > /tmp/template_1k.mac
+
+Use a macro to plot:
+sum_edep.C
