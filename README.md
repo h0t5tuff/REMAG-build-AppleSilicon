@@ -17,7 +17,7 @@
 >cmake --build . --target install
 
 
-# EXAMPLES
+## examples
 
 ex1:
 
@@ -70,7 +70,7 @@ build BxDecay0 before building REMAGE
 >
 >sudo cmake --install .
 
-# EXAMPLES
+## examples
 >cd build
 >
 >ctest
