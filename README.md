@@ -6,10 +6,11 @@
 >mkdir build && cd build
 >
 >cmake .. \
+  -DCMAKE_BUILD_TYPE=Release \
   -DCMAKE_INSTALL_PREFIX="$HOME/opt/remage" \
   -DGeant4_DIR="$HOME/GEANT4/install-11.4/lib/cmake/Geant4" \
   -DROOT_DIR="/opt/homebrew/Cellar/root/6.36.06_1" \
-  -DCMAKE_PREFIX_PATH="$HOME/opt/bxdecay0/1.2.1;/opt/homebrew;$HOME/GEANT4/install-11.4" \
+  -DCMAKE_PREFIX_PATH="$HOME/BXDECAY0/install/bxdecay0/1.2.1;/opt/homebrew;$HOME/GEANT4/install-11.4" \
   -DPython3_EXECUTABLE="/opt/homebrew/opt/python@3.12/bin/python3.12"
 >
 >cmake --build . -j 8
@@ -44,6 +45,12 @@ ex2:
 >< Use a macro to plot: >
 >
 >sum_edep.C
+
+
+
+
+
+
 
 
 
