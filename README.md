@@ -51,24 +51,32 @@ ex2:
 
 # BxDecay0
 build BxDecay0 before building REMAGE
+
+>cd "$HOME/BXDECAY0
+>
 >git clone https://github.com/BxCppDev/bxdecay0.git
 >
 >cd bxdecay0
 >
->git lfs install
->
->git lfs pull
+>git lfs install && git lfs pull
 
->export BXDECAY0_PREFIX="$HOME/opt/bxdecay0/1.2.1"
-
->mkdir build && cd build
+>mkdir -p "$HOME/BXDECAY0/build" && cd "$HOME/BXDECAY0/build"
 >
->cmake .. \
+>cmake -S ../bxdecay0 \
+  -G Ninja \
   -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_INSTALL_PREFIX="$BXDECAY0_PREFIX" \
+  -DCMAKE_OSX_ARCHITECTURES=arm64 \
+  -DBUILD_SHARED_LIBS=ON \
   -DBXDECAY0_WITH_GEANT4_EXTENSION=ON \
-  -DCMAKE_INSTALL_PREFIX="$BXDECAY0_PREFIX"cmake --build . -- -j$(sysctl -n hw.ncpu)
+  -DGeant4_DIR="$Geant4_DIR" \
+  -DBXDECAY0_INSTALL_DBD_GA_DATA=ON
 >
->sudo cmake --install .
+>cmake --build . -j"$(sysctl -n hw.ncpu)"
+>
+>cmake --install .
+
+
 
 ## examples
 >cd build
