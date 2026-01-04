@@ -3,19 +3,23 @@
 >
 >cd REMAGE
 >
->mkdir build && cd build
+>rm -rf build && mkdir build && cd build
 >
->cmake .. \
+>cmake -S ../remage \
+  -G "Unix Makefiles" \
   -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_INSTALL_PREFIX="$HOME/opt/remage" \
-  -DGeant4_DIR="$HOME/GEANT4/install-11.4/lib/cmake/Geant4" \
-  -DROOT_DIR="/opt/homebrew/Cellar/root/6.36.06_1" \
-  -DCMAKE_PREFIX_PATH="$HOME/BXDECAY0/install/bxdecay0/1.2.1;/opt/homebrew;$HOME/GEANT4/install-11.4" \
-  -DPython3_EXECUTABLE="/opt/homebrew/opt/python@3.12/bin/python3.12"
+  -DCMAKE_INSTALL_PREFIX="$REMAGE_PREFIX" \
+  -DCMAKE_OSX_ARCHITECTURES=arm64 \
+  -DGeant4_DIR="$Geant4_DIR" \
+  -DROOT_DIR="$ROOT_DIR" \
+  -DPython3_EXECUTABLE="$Python3_EXECUTABLE" \
+  -DCMAKE_PREFIX_PATH="$BXDECAY0_PREFIX;$GEANT4_BASE;/opt/homebrew"
 >
->cmake --build . -j 8
+>cmake --build . -j"$(sysctl -n hw.ncpu)"
 >
->cmake --build . --target install
+>ctest --output-on-failure
+>
+>cmake --install .
 
 
 ## examples
@@ -59,10 +63,6 @@ ex2:
 # BxDecay0
 build BxDecay0 before building REMAGE
 
->mkdir -p "$HOME/BXDECAY0"
->
->cd "$HOME/BXDECAY0
->
 >git clone https://github.com/BxCppDev/bxdecay0.git
 >
 >cd bxdecay0
