@@ -59,6 +59,8 @@ ex2:
 # BxDecay0
 build BxDecay0 before building REMAGE
 
+>mkdir -p "$HOME/BXDECAY0"
+>
 >cd "$HOME/BXDECAY0
 >
 >git clone https://github.com/BxCppDev/bxdecay0.git
@@ -81,7 +83,11 @@ build BxDecay0 before building REMAGE
 >
 >cmake --build . -j"$(sysctl -n hw.ncpu)"
 >
+>ctest --output-on-failure
+>
 >cmake --install .
+
+
 
 
 
