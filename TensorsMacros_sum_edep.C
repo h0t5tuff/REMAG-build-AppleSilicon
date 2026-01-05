@@ -13,7 +13,7 @@
 #include "TH1D.h"
 #include "TTree.h"
 
-void sum_edep() {
+void TensorsMacros_sum_edep() {
 
   const char* file0 = "decay0_0vbb_250k.root";
   const char* file2 = "decay0_2vbb_250k.root";
