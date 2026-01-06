@@ -1,4 +1,5 @@
 # REMAGE
+
 mkdir REMAGE && cd REMAGE
 git clone https://github.com/legend-exp/remage.git
 rm -rf build && mkdir build && cd build
@@ -14,15 +15,14 @@ cmake -S ../remage \
 cmake --build . -j"$(sysctl -n hw.ncpu)"
 ctest --output-on-failure
 cmake --install .
-
-## examples
-ex1:
+-----------examples------------
+#ex1:
 cd ~/REMAGE/remage/tests/output
 remage \
   -g gdml/geometry.gdml \
   -o test.root \
   -- macros/ntuple-single-table.mac
-ex2:
+# ex2:
 cd ~/REMAGE/remage/tests/bxdecay0
 rm -f *.root
 remage -g gdml/geometry.gdml \
@@ -31,11 +31,16 @@ remage -g gdml/geometry.gdml \
        -- macros/template.mac
 Use macro to plot:
 TensorsMacros_sum_edep.C
-
+# ex3:
+cd ~/REMAGE/remage/examples/03-optics
+rm -rf build && mkdir build && cd build
+cmake -S . -B build -DCMAKE_PREFIX_PATH="$REMAGE_PREFIX"
+cmake --build build --parallel "$(sysctl -n hw.ncpu)"
 
 
 
 # BxDecay0 (needed for REMAGE)
+
 mkdir BXDECAY0 && cd BXDECAY0 
 git clone https://github.com/BxCppDev/bxdecay0.git
 cd bxdecay0
@@ -54,9 +59,8 @@ cmake -S ../bxdecay0 \
 cmake --build . -j"$(sysctl -n hw.ncpu)"
 ctest --output-on-failure
 cmake --install .
-
-## examples
-cd build
+-------------examples------------
+rm -rf build && mkdir build && cd build
 ctest
 ./bxdecay0-test_decay0_generator
 ./bxdecay0-run -s 42 -n 1000 -c dbd -N "Ge76" -m 1 -b "./genGe76"
