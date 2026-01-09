@@ -1,12 +1,11 @@
-# REMAGE
-
+---------------REMAGE---------
 mkdir REMAGE && cd REMAGE
 git clone https://github.com/legend-exp/remage.git
 rm -rf build && mkdir build && cd build
 cmake -S ../remage \
   -G "Unix Makefiles" \
   -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_INSTALL_PREFIX="$REMAGE_PREFIX" \
+  -DCMAKE_INSTALL_PREFIX="$REMAGE_PREFIX/remage" \
   -DCMAKE_OSX_ARCHITECTURES=arm64 \
   -DGeant4_DIR="$Geant4_DIR" \
   -DROOT_DIR="$ROOT_DIR" \
@@ -15,9 +14,11 @@ cmake -S ../remage \
 cmake --build . -j"$(sysctl -n hw.ncpu)"
 ctest --output-on-failure
 cmake --install .
+
 -----------examples------------
 #ex1:
 cd ~/REMAGE/remage/tests/output
+rm -f *.root
 remage \
   -g gdml/geometry.gdml \
   -o test.root \
@@ -39,8 +40,13 @@ cmake --build build --parallel "$(sysctl -n hw.ncpu)"
 
 
 
-# BxDecay0 (needed for REMAGE)
 
+
+
+
+
+
+# BxDecay0 (needed for REMAGE)
 mkdir BXDECAY0 && cd BXDECAY0 
 git clone https://github.com/BxCppDev/bxdecay0.git
 cd bxdecay0
@@ -50,7 +56,7 @@ rm -rf build && mkdir build && cd build
 cmake -S ../bxdecay0 \
   -G Ninja \
   -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_INSTALL_PREFIX="$BXDECAY0_PREFIX" \
+  -DCMAKE_INSTALL_PREFIX="$HOME/BXDECAY0/install" \
   -DCMAKE_OSX_ARCHITECTURES=arm64 \
   -DBUILD_SHARED_LIBS=ON \
   -DBXDECAY0_WITH_GEANT4_EXTENSION=ON \
@@ -59,8 +65,5 @@ cmake -S ../bxdecay0 \
 cmake --build . -j"$(sysctl -n hw.ncpu)"
 ctest --output-on-failure
 cmake --install .
--------------examples------------
-rm -rf build && mkdir build && cd build
-ctest
-./bxdecay0-test_decay0_generator
-./bxdecay0-run -s 42 -n 1000 -c dbd -N "Ge76" -m 1 -b "./genGe76"
+
+
