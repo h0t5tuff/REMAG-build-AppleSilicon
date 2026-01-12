@@ -29,7 +29,7 @@ cmake -S .. -B . -G Ninja \
   -DCMAKE_PREFIX_PATH="$CMAKE_PREFIX_PATH"
 cmake --build . -j"$(sysctl -n hw.ncpu)"
   #run from /01-gdml dir (i.e. ./build/01-gdml)
-  #rewrote main.cc to have UI
+  #rewrote main.cc to have UI and rewrote vis macros to work
 
 # examples/02-hpge:
 
