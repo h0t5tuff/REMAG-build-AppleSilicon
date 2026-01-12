@@ -14,13 +14,9 @@ ctest --output-on-failure
 cmake --install .
 
 -----------examples------------
-# tests/bxdecay0:
-rm -f *.root
-remage -g gdml/geometry.gdml \
-       -o decay0_0vbb_250k.root \
-       -s MODE="0vbb 0" \
-       -- macros/template.mac
-  #Use macro TensorsMacros_sum_edep.C to plot
+# run
+UI mode: ./<sim> ---> /control/execute <mac> 
+batch mode: ./<sim> -m <mac>
 
 # examples/01-gdml:
 cmake -S .. -B . -G Ninja \
@@ -30,7 +26,6 @@ cmake -S .. -B . -G Ninja \
 cmake --build . -j"$(sysctl -n hw.ncpu)"
   #run from /01-gdml dir (i.e. ./build/01-gdml)
   #rewrote main.cc to have UI and rewrote vis macros to work
-
 # examples/02-hpge:
 
 # examples/03-optics: 
@@ -67,14 +62,17 @@ cmake --build build --parallel "$(sysctl -n hw.ncpu)"
 	#•	How to implement a custom output scheme for specific physics questions (isotope accounting).
 	#•	Neutron capture in materials (Cu, SS, Ar, etc.) creates gamma lines and Compton continua near ROI. This is directly relevant to the 0\nu\beta\beta background model.
 
+# tests/bxdecay0:
+rm -f *.root
+remage -g gdml/geometry.gdml \
+       -o decay0_0vbb_250k.root \
+       -s MODE="0vbb 0" \
+       -- macros/template.mac
+  #Use macro TensorsMacros_sum_edep.C to plot
 
 
 
 
-
-# run
-UI mode: ./<sim> ---> /control/execute <mac> 
-batch mode: ./<sim> -m <mac>
 
 
 
